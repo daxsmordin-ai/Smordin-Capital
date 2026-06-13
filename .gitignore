@@ -12,6 +12,9 @@ prisma/dev.db
 prisma/dev.db-journal
 prisma/*.db
 prisma/*.db-journal
+prisma/prisma/
+
+.ingest-token
 
 *.log
 .DS_Store
