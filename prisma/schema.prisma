@@ -1,0 +1,63 @@
+// Prisma schema for the Project Finance News Aggregator.
+// Uses Postgres locally and in production (Netlify, Neon, Supabase, etc.).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Source {
+  id            String     @id @default(cuid())
+  name          String     @unique
+  type          String     // "rss" | "gdelt" | "newsapi" | "marketaux"
+  url           String?    // feed URL or query template
+  region        String?
+  sector        String?
+  enabled       Boolean    @default(true)
+  lastFetchedAt DateTime?
+  lastError     String?
+  articles      Article[]
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+}
+
+model Article {
+  id              String    @id @default(cuid())
+  title           String
+  summary         String?
+  url             String    @unique
+  urlHash         String    @unique
+  source          Source?   @relation(fields: [sourceId], references: [id], onDelete: SetNull)
+  sourceId        String?
+  sourceName      String
+  author          String?
+  publishedAt     DateTime
+  fetchedAt       DateTime  @default(now())
+  region          String?
+  sector          String?
+  keywordsCsv     String?   // comma-separated tags
+  relevanceScore  Float     @default(0)
+  language        String?
+  imageUrl        String?
+
+  @@index([publishedAt])
+  @@index([sector])
+  @@index([region])
+  @@index([sourceName])
+  @@index([relevanceScore])
+}
+
+model FetchRun {
+  id                 String    @id @default(cuid())
+  startedAt          DateTime  @default(now())
+  finishedAt         DateTime?
+  sourcesAttempted   Int       @default(0)
+  sourcesSucceeded   Int       @default(0)
+  articlesFetched    Int       @default(0)
+  articlesNew        Int       @default(0)
+  errors             String?   // newline-separated summary
+}
