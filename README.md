@@ -1,14 +1,16 @@
 # Smordin Capital — Project Finance News
 
-A small Next.js app that ingests, normalizes, and classifies project finance,
-infrastructure, and energy-transition news from a mix of public RSS feeds, the
-open GDELT index, and (optionally) commercial news APIs.
+Internal news intelligence app for Smordin Capital. Ingests, normalizes, and
+classifies project finance, infrastructure, and energy-transition headlines from
+public RSS feeds, the open GDELT index, and optional commercial news APIs.
+
+> **Note:** This app is separate from [smordincapital.com](https://smordincapital.com).
 
 ## Highlights
 
 - Mixed-source ingestion: RSS, GDELT (no key required), NewsAPI/Marketaux
   (auto-skipped without keys).
-- Local SQLite persistence via Prisma — zero-config dev, easy swap to Postgres.
+- Postgres persistence via Prisma (Neon in production).
 - Lightweight rules-based classifier tags sector, region, and a relevance score.
 - Server components + client dashboard with search, faceted filters, freshness
   badges, and source health.
@@ -20,17 +22,20 @@ open GDELT index, and (optionally) commercial news APIs.
 # 1. Install
 npm install
 
-# 2. Initialise the database
+# 2. Configure database
 cp .env.example .env
+# Set DATABASE_URL to your Postgres connection string (Neon recommended)
+
+# 3. Apply migrations
 npm run db:migrate
 
-# 3. (optional) Seed source catalog so it shows up before first ingest
+# 4. Seed source catalog
 npm run seed:sources
 
-# 4. Pull the first batch of news
+# 5. Pull the first batch of news
 npm run ingest
 
-# 5. Open the dashboard
+# 6. Open the dashboard
 npm run dev
 ```
 
@@ -42,7 +47,7 @@ All settings live in `.env`. See `.env.example` for the full list:
 
 | Variable | Purpose |
 | -------- | ------- |
-| `DATABASE_URL` | Prisma connection string. Defaults to `file:./prisma/dev.db`. |
+| `DATABASE_URL` | Postgres connection string for Prisma. |
 | `NEWS_API_KEY` | Optional. Enables the NewsAPI.org provider when present. |
 | `MARKETAUX_API_KEY` | Optional. Enables the Marketaux provider when present. |
 | `INGEST_TOKEN` | Optional. Required as `Bearer` for `/api/ingest` when set. |
@@ -64,10 +69,10 @@ npm run ingest -- --max 25
 ## Scheduling
 
 The `/api/ingest` endpoint runs the same pipeline as the CLI. Schedule it from
-any cron service (Vercel Cron, GitHub Actions, etc.). Example:
+any cron service (Netlify scheduled functions, GitHub Actions, etc.). Example:
 
 ```bash
-curl -X POST https://your-deploy.example.com/api/ingest \
+curl -X POST https://smordin-capital-news.netlify.app/api/ingest \
   -H "Authorization: Bearer $INGEST_TOKEN"
 ```
 
@@ -81,7 +86,7 @@ matching `*_API_KEY` env var.
 ## Architecture
 
 ```
-RSS / GDELT / APIs  ->  fetchers  ->  normalize + classify  ->  Prisma (SQLite)
+RSS / GDELT / APIs  ->  fetchers  ->  normalize + classify  ->  Prisma (Postgres)
                                                                    |
                                                                    v
                                                        Next.js API + dashboard
@@ -95,6 +100,11 @@ Key files:
 - `src/lib/normalize.ts`, `src/lib/classify.ts` — cleaning and tagging.
 - `src/app/api/articles/route.ts`, `src/app/api/ingest/route.ts` — server APIs.
 - `src/app/page.tsx`, `src/components/Dashboard.tsx` — UI.
+
+## Deploy
+
+Hosted on Netlify at [smordin-capital-news.netlify.app](https://smordin-capital-news.netlify.app).
+Source: [github.com/daxsmordin-ai/Smordin-Capital](https://github.com/daxsmordin-ai/Smordin-Capital).
 
 ## Notes
 

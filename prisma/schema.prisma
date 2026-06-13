@@ -1,4 +1,4 @@
-// Prisma schema for the Project Finance News Aggregator.
+// Prisma schema for Smordin Capital project finance news.
 // Uses Postgres locally and in production (Netlify, Neon, Supabase, etc.).
 
 generator client {
