@@ -32,7 +32,7 @@ export async function fetchNewsApi(source: SourceConfig): Promise<RawArticle[]> 
   const res = await fetch(`https://newsapi.org/v2/everything?${params.toString()}`, {
     headers: {
       "X-Api-Key": apiKey,
-      "User-Agent": "PF-News-Aggregator/0.1",
+      "User-Agent": "Smordin-Capital/0.1",
     },
   });
   const data = (await res.json()) as NewsApiResponse;

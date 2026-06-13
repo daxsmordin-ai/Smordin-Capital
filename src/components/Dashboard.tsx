@@ -158,14 +158,15 @@ export default function Dashboard({ initial }: { initial: DashboardInitial }) {
       <header className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
-            Project Finance · News Aggregator
+            Project Finance Intelligence
           </p>
           <h1 className="mt-1 text-3xl font-semibold tracking-tight text-ink md:text-4xl">
-            Deal flow, infra & energy transition headlines.
+            Smordin Capital
           </h1>
           <p className="mt-2 max-w-2xl text-sm text-ink-muted">
-            Pulls from curated RSS, the open GDELT index, and optional API providers. Articles
-            are de-duped, classified, and scored for relevance to project finance work.
+            Deal flow, infra & energy transition headlines — pulled from curated RSS, the open
+            GDELT index, and optional API providers. Articles are de-duped, classified, and scored
+            for relevance.
           </p>
         </div>
         <div className="flex flex-col items-stretch gap-2 md:items-end">

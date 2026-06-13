@@ -1,8 +1,8 @@
 {
-  "name": "pf-news",
+  "name": "smordin-capital",
   "version": "0.1.0",
   "private": true,
-  "description": "Project Finance news aggregator: ingest, normalize, and browse global PF deal flow and infrastructure news.",
+  "description": "Smordin Capital: project finance news aggregator for global deal flow and infrastructure headlines.",
   "scripts": {
     "dev": "next dev",
     "build": "prisma generate && next build",
@@ -17,8 +17,6 @@
     "seed:sources": "tsx scripts/seed-sources.ts"
   },
   "dependencies": {
-    "@neondatabase/serverless": "^1.1.0",
-    "@prisma/adapter-neon": "^7.8.0",
     "@prisma/client": "^5.22.0",
     "next": "^15.5.0",
     "react": "^19.0.0",

@@ -3,9 +3,9 @@ import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "PF News — Project Finance Aggregator",
+  title: "Smordin Capital — Project Finance News",
   description:
-    "Aggregated, classified project finance and infrastructure news from RSS, GDELT, and optional API sources.",
+    "Smordin Capital: aggregated project finance and infrastructure news from RSS, GDELT, and optional API sources.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

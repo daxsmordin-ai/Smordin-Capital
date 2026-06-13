@@ -37,7 +37,7 @@ export async function fetchGdelt(source: SourceConfig): Promise<RawArticle[]> {
   });
   const res = await fetch(`${GDELT_ENDPOINT}?${params.toString()}`, {
     headers: {
-      "User-Agent": "PF-News-Aggregator/0.1",
+      "User-Agent": "Smordin-Capital/0.1",
       Accept: "application/json",
     },
   });

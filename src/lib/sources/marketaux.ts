@@ -29,7 +29,7 @@ export async function fetchMarketaux(source: SourceConfig): Promise<RawArticle[]
     filter_entities: "true",
   });
   const res = await fetch(`https://api.marketaux.com/v1/news/all?${params.toString()}`, {
-    headers: { "User-Agent": "PF-News-Aggregator/0.1" },
+    headers: { "User-Agent": "Smordin-Capital/0.1" },
   });
   const data = (await res.json()) as MarketauxResponse;
   if (!res.ok) {

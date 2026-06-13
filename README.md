@@ -1,4 +1,4 @@
-# PF News — Project Finance News Aggregator
+# Smordin Capital — Project Finance News
 
 A small Next.js app that ingests, normalizes, and classifies project finance,
 infrastructure, and energy-transition news from a mix of public RSS feeds, the

@@ -4,7 +4,7 @@ import type { RawArticle, SourceConfig } from "../types";
 const parser = new Parser({
   timeout: 15000,
   headers: {
-    "User-Agent": "PF-News-Aggregator/0.1 (+https://example.com)",
+    "User-Agent": "Smordin-Capital/0.1",
     Accept: "application/rss+xml, application/atom+xml, application/xml;q=0.9, */*;q=0.8",
   },
 });
