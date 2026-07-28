@@ -48,10 +48,21 @@ All settings live in `.env`. See `.env.example` for the full list:
 | Variable | Purpose |
 | -------- | ------- |
 | `DATABASE_URL` | Postgres connection string for Prisma. |
+| `SITE_PASSWORD` | Optional. When set, the whole site is gated behind this password. |
 | `NEWS_API_KEY` | Optional. Enables the NewsAPI.org provider when present. |
 | `MARKETAUX_API_KEY` | Optional. Enables the Marketaux provider when present. |
 | `INGEST_TOKEN` | Optional. Required as `Bearer` for `/api/ingest` when set. |
 | `INGEST_MAX_PER_SOURCE` | Cap of articles persisted per source per run. |
+
+### Locking the site
+
+Set `SITE_PASSWORD` in your host environment (Netlify → Site configuration →
+Environment variables) and redeploy. Visitors will see a password prompt at
+`/login` until they enter the correct value. Clear or unset `SITE_PASSWORD` and
+redeploy when you want the site public again.
+
+`/api/ingest` stays reachable for cron jobs and still requires `INGEST_TOKEN`
+when that variable is set.
 
 ## CLI
 
