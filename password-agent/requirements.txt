@@ -1,0 +1,4 @@
+msoffcrypto-tool>=5.4.0
+pikepdf>=9.0.0
+pypdf>=5.0.0
+pyhanko>=0.25.0
