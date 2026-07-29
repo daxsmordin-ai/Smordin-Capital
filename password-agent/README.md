@@ -40,6 +40,17 @@ python3 src/recover.py \
 
 On success, decrypted copies are written to `out/decrypted_*`.
 
+## Recovered credentials (this package)
+
+For the bundled December 2023 IFA Modeling Test files, the agent recovered a shared password:
+
+| File | Password |
+| --- | --- |
+| `IFA_Modeling_Test_December_2023.xlsx` | `alpaca` |
+| `Modeling_Test_Instructions_December_2023.pdf` | `alpaca` |
+
+Decrypted copies are written locally to `out/decrypted_*` (gitignored).
+
 ## Notes
 
 - Excel Agile encryption (~100k SHA-512 iterations) is the bottleneck (~70 tries/sec on 4 cores here).
